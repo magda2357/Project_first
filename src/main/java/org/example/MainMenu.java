@@ -1,35 +1,22 @@
-package menu;
+package org.example;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class InteractiveMenu {
+import static org.example.MenuSwitch.menu;
 
-    static String options(int numer) {
-        switch (numer) {
-            case 1:
-                return ("Podaj dzisiejszą datę");
-            case 2:
-                return "Podaj swoje imię.";
-            case 3:
-                return "Wypisz swoje imię.";
-            case 4:
-                return "Koniec programu";
-            default:
-                return "Niewłaściwy numer, wybierz jeszcze raz!";
-        }
-    }
+public class MainMenu {
 
-    public static void main(String[] args) {
-        int option = 0;
-        String name = "Jeszcze nie podałaś/eś imienia";
+    public static void main(String[] args) throws IOException {
+
         Scanner sc = new Scanner(System.in);
 
+        int option = 0;
         while (option != 4) {
-
             System.out.println("WYBIERZ OPCJĘ:");
             for (int i = 1; i <= 4; i++) {
-                System.out.println(i + " " + options(i));
+                System.out.println(i + " " + menu(i));
             }
 
             if (sc.hasNextInt()) {
@@ -37,13 +24,13 @@ public class InteractiveMenu {
                 if (option == 1) {
                     System.out.println("Dzisiejsza data to: " + LocalDate.now());
                 } else if (option == 2) {
-                    name = sc.next();
+                    User.addUser();
                 } else if (option == 3) {
-                    System.out.println("Masz na imię: " + name);
+                    User.printUsers();
                 } else if (option == 4) {
                     System.out.println("KONIEC PROGRAMU");
                 } else {
-                    System.out.println(options(option));
+                    System.out.println(menu(option));
                 }
             } else {
                 System.out.println("Niewłaściwy format numeru, wybierz jeszcze raz!");
