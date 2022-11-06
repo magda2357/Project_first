@@ -1,7 +1,15 @@
 package org.example;
 
-public class MenuSwitch {
-    static String menu(int number) {
+public class Menu {
+
+    public static void showMenu() {
+        System.out.println("WYBIERZ OPCJĘ:");
+
+        for (int i = 1; i <= 4; i++) {
+            System.out.println(i + " " + menuSwitch(i));
+        }
+    }
+    static String menuSwitch(int number) {
         switch (number) {
             case 1:
                 return ("Podaj dzisiejszą datę");

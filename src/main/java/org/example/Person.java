@@ -15,11 +15,6 @@ public abstract class Person {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Użytkownik: " + name + " " + surname + ", " + gender + ".";
-    }
-
     public String getName() {
         return name;
     }
@@ -42,5 +37,10 @@ public abstract class Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Użytkownik: " + name + " " + surname + ", " + gender + ".";
     }
 }
