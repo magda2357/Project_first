@@ -8,9 +8,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import static java.util.Comparator.*;
+
 public class FileManager {
+
     static void writeToTxt(String fileName, String text) {
         try (FileWriter fr = new FileWriter(fileName)) {
             fr.write(text);
@@ -21,7 +25,7 @@ public class FileManager {
 
     public static List<User> getUsersFromFile(String fileName, String separator) {
 
-        if(!Files.exists(Path.of(fileName))) {
+        if (!Files.exists(Path.of(fileName))) {
             FileManager.writeToTxt(fileName, "");
         }
 
@@ -37,7 +41,16 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Collections.sort(list);
         return list;
     }
+
+    public static List<User> sortList(List<User> list, String order) {
+        if (order.equals("Asc")) {
+            list.sort(naturalOrder());
+        } else if (order.equals("Desc")) {
+            list.sort(naturalOrder());
+        }
+        return list;
+    }
+
 }

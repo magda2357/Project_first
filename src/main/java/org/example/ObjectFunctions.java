@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,11 +9,28 @@ public class ObjectFunctions {
 
         List<User> users = FileManager.getUsersFromFile(MainMenu.FILE_NAME, ";");
         users.add(getUserData());
-        Collections.sort(users);
+        FileManager.sortList(users, "Asc");
 
         saveObjectsToTxt(MainMenu.FILE_NAME, users);
 
         System.out.println("Dodano nowego użytkownika.");
+    }
+
+
+    public static boolean isEmailCorrect(String login) {
+        String email_pattern = "^[a-zA-Z0-9_#$%&’*+/=?^.-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return login.matches(email_pattern);
+    }
+
+    public static void printUsers() {
+
+        List<User> users = FileManager.getUsersFromFile(MainMenu.FILE_NAME, ";");
+        FileManager.sortList(users, "Asc");
+
+        System.out.println("Użytkownicy: ");
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
     }
 
     private static void saveObjectsToTxt(String fileName, List<User> users) {
@@ -39,10 +55,10 @@ public class ObjectFunctions {
         String lastName = sc.next();
 
         System.out.println("Podaj płeć: K/M.");
-        String gen=sc.next();
+        String gen = sc.next();
         while (!gen.equals("K") && !gen.equals("M")) {
             System.out.println("Zły format. Podaj jeszcze raz: K/M?");
-            gen=sc.next();
+            gen = sc.next();
         }
         Gender gender = Gender.valueOf(gen);
 
@@ -57,21 +73,6 @@ public class ObjectFunctions {
         String password = sc.next();
 
         return new User(firstName, lastName, gender, login, password);
-    }
-
-    static boolean isEmailCorrect(String login) {
-        String email_pattern = "^[a-zA-Z0-9_#$%&’*+/=?^.-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        return login.matches(email_pattern);
-    }
-
-    public static void printUsers() {
-
-        List<User> users = FileManager.getUsersFromFile(MainMenu.FILE_NAME, ";");
-
-        System.out.println("Użytkownicy: ");
-        for (User user : users) {
-            System.out.println(user.toString());
-        }
     }
 
 }

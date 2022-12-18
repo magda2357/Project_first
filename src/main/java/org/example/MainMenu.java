@@ -9,7 +9,7 @@ public class MainMenu {
 
     public static void main(String[] args) {
 
-        for (; ; ) {
+        while (true) {
             showMenu();
             performOption();
         }
